@@ -1,5 +1,5 @@
-Sign up page = App logo, Sign In markup, Sign up button 
-Add item page = Form, Go back arrow, Upload Photo, Add item Button
-Borrow item page = 
-Browse item page = 
-Manage community page = 
+Sign up page = App logo, Sign In Form, Sign up button / Nav 
+Add item page = Form, Go back arrow, Upload Photo, Nav Bar
+Borrow item page = Form, Go back arrow, Upload Photo, Nav Bar
+Browse item page = Welcome message, Item/Lender Table, Add Item, Nav Bar
+Manage community page = Go back arrow, Friend Table, Checkbox
