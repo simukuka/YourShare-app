@@ -1,12 +1,10 @@
 import React from "react";
 import "./App.css";
-import { SignupPage } from "./pages/SignupPage";
 import { WelcomePage } from "./pages/WelcomePage";
 import { AddItemPage } from "./pages/AddItemPage";
 import { CommunityPage } from "./pages/CommunityPage";
 
 export const pages = {
-  SignupPage: "SignupPage",
   WelcomePage: "WelcomePage",
   CommunityPage: "CommunityPage",
   AddItemPage: "AddItemPage",
@@ -20,9 +18,6 @@ function App() {
 
     console.log("currentPage: " + currentPage);
     switch (currentPage) {
-      case pages.SignupPage: 
-        whichComponentToShow = <SignupPage changePage={setCurrentPage} />;
-        break;
       case pages.CommunityPage:
         whichComponentToShow = <CommunityPage changePage={setCurrentPage} />;
         break;

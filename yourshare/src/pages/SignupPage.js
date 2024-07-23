@@ -1,44 +1,48 @@
 import React from "react";
-import { pages } from "../App";
-import { Container, Row, Col, Form, Button} from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, FormLabel} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import YS_Icon from "../images/YS_icon.png";
 
 function SignupPage() {
   return (
-    <Container>
-      <Row classNmae="justify-content-center">
-        <Col md={6} className="text-center">
+    <Container className="mt-5">
+      <Row className="justify-content-center">
+        <Col md={6} className="d-flex flex-column justify-content-center align-items-center text-center">
           <div className="mt-5">
+            <h1><b>YourShare</b></h1>
             <img
-              src="C:\Users\v-leecaceres\Documents\TNT\tntw3_2\Team13-2024-AppPrototype\yourshare\src\images\YS_icon.png"
+              src= { YS_Icon }
               alt="YourShare Logo"
-              style={{ width: '100px', height: '100px'}}
+              style={{ width: '250px', height: '250px'}}
             />
-            <h1>YourShare</h1>
-            <h2>Join your community</h2>
           </div>
-          <Form>
-            <Form.Group controlId="formUsername">
-              <Form.Label>Username:</Form.Label>
-              <Form.Control type ="text" placeholder="Enter username" />
-            </Form.Group>
+        </Col>
+        <Col md={6}>
+          <div className="mt-5">
+            <h1 className="mb-4">Join your community</h1>
+            <Form className="form">
+              <FormLabel><h3>Sign-up</h3></FormLabel>
+              <Form.Group controlId="formUsername">
+                <Form.Control type ="text" placeholder="Username:" className="mb-5" />
+              </Form.Group>
 
-            <Form.Group controlId="formPhoneNumber">
-              <Form.Label>Phone number:</Form.Label>
-              <Form.Control type="text" placeholder="Enter phone number" />
-            </Form.Group>
+              <Form.Group controlId="formPhoneNumber">
+                <Form.Control type="text" placeholder="Phone number:" className="mb-5" />
+              </Form.Group>
 
-            <Form.Group controlId="formZipCode">
-              <Form.Label>Zip code:</Form.Label>
-              <Form.Control type="text" placeholder="Enter zip code" />
-            </Form.Group>
+              <Form.Group controlId="formZipCode">
+                <Form.Control type="text" placeholder="Zip code:" className="mb-5" />
+              </Form.Group>
 
-            <Button variant="primary" type="submit">
-              Join
-            </Button>
-          </Form>
-          <div className="mt-3">
-            <a href="/">Sign-in</a>
+              <div className="text-end">
+                <Button variant="secondary" type="submit" style={{ width: '25%' }}>
+                  Join
+                </Button>
+              </div>
+            </Form>
+          </div>
+          <div className="mt-3 text-start">
+            <a href="/" className="custom-link">Sign-in</a>
           </div>
         </Col>
       </Row>
@@ -46,4 +50,4 @@ function SignupPage() {
   );
 }
 
-export default SignupPage;
+export { SignupPage };
