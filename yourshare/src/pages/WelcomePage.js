@@ -1,12 +1,26 @@
 import React from "react";
-import { pages } from "../App";
+
+import { Link, useNavigate } from "react-router-dom";
+
 
 export const WelcomePage = (props) => {
+  const navigate = useNavigate();
+  const handleSubmit = (event)=>{
+    event.preventDefault();
+    navigate("/community")
+
+  };
   return (
     <div>
-      <h1>Welcome</h1>
-      <p onClick={(e) => props.changePage(pages.AddItemPage)}>Add item</p>
-      <p onClick={(e) => props.changePage(pages.CommunityPage)}>Community</p>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input type="text" name="name"></input>
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+     <p> <Link to="/community">Sign In</Link></p>
+
     </div>
   );
 };
