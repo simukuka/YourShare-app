@@ -1,9 +1,17 @@
-import React from "react";
+import React, {useState} from "react";
 import { Container, Row, Col, Form, Button, FormLabel} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import YS_Icon from "../images/YS_icon.png";
 
-function SignupPage() {
+function SignupPage(props) {
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.setUsername(username);
+    props.changePage("WelcomePage");
+  };
+
   return (
     <Container className="mt-5">
       <Row className="justify-content-center">
@@ -20,10 +28,16 @@ function SignupPage() {
         <Col md={6}>
           <div className="mt-5">
             <h1 className="mb-4">Join your community</h1>
-            <Form className="form">
+            <Form className="form" onSubmit={handleSubmit}>
               <FormLabel><h3>Sign-up</h3></FormLabel>
               <Form.Group controlId="formUsername">
-                <Form.Control type ="text" placeholder="Username:" className="mb-5" />
+                <Form.Control 
+                  type ="text" 
+                  placeholder="Username:" 
+                  className="mb-5" 
+                  value= {username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
               </Form.Group>
 
               <Form.Group controlId="formPhoneNumber">
