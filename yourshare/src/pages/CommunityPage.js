@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Image from 'react-bootstrap/Image';
-import Y_s from "../images/93634.png";
+import Y_s from "../images/back-button.png";
 
 export const CommunityPage = (props) => {
   const navigate = useNavigate();
