@@ -4,6 +4,8 @@ import { WelcomePage } from "./pages/WelcomePage";
 import { AddItemPage } from "./pages/AddItemPage";
 import { CommunityPage } from "./pages/CommunityPage";
 import { SignupPage } from "./pages/SignupPage";
+import { Routes, Route, Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const pages = {
   WelcomePage: "WelcomePage",
@@ -27,7 +29,18 @@ function App() {
       )}
       {currentPage === "WelcomePage" && <WelcomePage username={username} />}
     </div>
-  )
+  );
+
+  // return (
+  // <div className="App">
+  //   <Routes>
+  //     <Route path="/" element={<WelcomePage/>}/>
+  //     <Route path="/community" element={<CommunityPage/>}/>
+  //     <Route path="/additem" element={<AddItemPage/>}/>
+  //     <Route path="*" element={<div>Page Not Found 484</div>}/>
+  //   </Routes>
+  // </div>
+  // );
 }
 
 // function App() {

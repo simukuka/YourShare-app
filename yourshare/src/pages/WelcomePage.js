@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { pages } from "../App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Button, Container, Row, Col} from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 const WelcomePage = () => {
   const [borrowedItems] = useState([
@@ -26,3 +27,26 @@ const WelcomePage = () => {
 // }
 
 export { WelcomePage };
+
+
+export const WelcomePage = (props) => {
+  const navigate = useNavigate();
+  const handleSubmit = (event)=>{
+    event.preventDefault();
+    navigate("/community")
+
+  };
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input type="text" name="name"></input>
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+     <p> <Link to="/community">Sign In</Link></p>
+
+    </div>
+  );
+};
