@@ -1,13 +1,16 @@
 import React, {useState} from "react";
-//import { pages } from "../App";
+import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Table, Button, Container, Row, Col} from "react-bootstrap";
-//import { Link, useNavigate } from "react-router-dom";
+import { Table, Button, Container, Row, Col, Form} from "react-bootstrap";
 import "../App.css";
 
 
 const WelcomePage = () => {
-  const [borrowedItems] = useState([
+  const location = useLocation();
+  const navigate = useNavigate();
+  const username = location.state?.username || "[username]";
+
+  const [borrowedItems, setBorrowedItems] = useState([
     { item: 'Blender', lender: 'Stacey' },
     { item: 'Rake', lender: 'Marcos' },
     { item: 'Car', lender: 'Marcos' },
@@ -19,17 +22,30 @@ const WelcomePage = () => {
     { item: 'Cart', lender: 'Jim' },
   ]);
 
-  const [yourItems] = useState([]);
-  const [lentTo] = useState([{ item: 'Add your first item', lentTo: 'A friend' }]);
+  const [yourItems, setYourItems] = useState([]);
+  const [newItem, setNewItem] = useState('');
+  const [newLender, setNewLender] = useState('');
+
+  const handleManageCommunity = () => {
+    navigate('/community');
+  }
+
+  const handleAddItem = () => {
+    if (newItem && newLender) {
+      setBorrowedItems([...borrowedItems, { item: newItem, lender: newLender }]);
+      setNewItem('');
+      setNewLender('');
+    }
+  }
 
   return (
     <Container className="mt-4">
       <Row className="mb-4 text-start">
-        <h1> Welcome, [username]!</h1>
+        <h1> Welcome, {username}!</h1>
       </Row>
       <Row>
-        <Col md={6}>
-          <Table borderless hover>
+        <Col md={6} className="table-container">
+          <Table borderless hover className="scrollable-table">
             <thead>
               <tr>
                 <th>Items for borrowing</th>
@@ -43,9 +59,11 @@ const WelcomePage = () => {
                   <td className="border">{borrow.lender}</td>
                 </tr>
               ))}
+              
             </tbody>
           </Table>
         </Col>
+
         <Col md={6}>
           <Table borderless hover>
             <thead>
@@ -56,25 +74,37 @@ const WelcomePage = () => {
             </thead>
             <tbody>
               {yourItems.map((item, index) => (
-                  <tr key={index}>
-                    <td className="border">{item.item}</td>
-                    <td>{item.lentTo}</td>
-                  </tr>
-                ))
-              }
-              {lentTo.map((item, index) => (
-                <tr key={index} className="italic-text">
+                <tr key={index}>
                   <td className="border">{item.item}</td>
                   <td className="border">{item.lentTo}</td>
                 </tr>
               ))}
+              <tr>
+                <td className="border">
+                  <Form.Control
+                    type="text"
+                    placeholder="Add your first item"
+                    value={newItem}
+                    onChange={(e) => setNewItem(e.target.value)}
+                  />
+                </td>
+                <td className="border">
+                  <Form.Control
+                    type="text"
+                    placeholder="A friend"
+                    value={newLender}
+                    onChange={(e) => setNewLender(e.target.value)}
+                  />
+                </td>
+              </tr>
             </tbody>
           </Table>
-          <div className="mt-4 mb-3">
-            <Button variant="secondary" className="mr-2">Add item</Button>
+
+          <div className="center-text mt-4 mb-3">
+            <Button variant="secondary" className="mr-2" onClick={handleAddItem}>Add item</Button>
           </div>
           <div className="center-text">
-            <Button variant="secondary">Manage community</Button>
+            <Button variant="secondary" onClick={handleManageCommunity}>Manage community</Button>
           </div>
         </Col>
       </Row>

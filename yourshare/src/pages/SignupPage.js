@@ -1,15 +1,16 @@
 import React, {useState} from "react";
 import { Container, Row, Col, Form, Button, FormLabel} from 'react-bootstrap';
+import { useNavigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import YS_Icon from "../images/YS_icon.png";
 
 function SignupPage(props) {
   const [username, setUsername] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.setUsername(username);
-    props.changePage("WelcomePage");
+    navigate('/welcome', {state: { username } });
   };
 
   return (
@@ -35,7 +36,7 @@ function SignupPage(props) {
                   type ="text" 
                   placeholder="Username:" 
                   className="mb-5" 
-                  value= {username}
+                  value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
@@ -56,7 +57,7 @@ function SignupPage(props) {
             </Form>
           </div>
           <div className="mt-3 text-start">
-            <a href="/" className="custom-link">Sign-in</a>
+            <a href="/welcome" className="custom-link">Sign-in</a>
           </div>
         </Col>
       </Row>
