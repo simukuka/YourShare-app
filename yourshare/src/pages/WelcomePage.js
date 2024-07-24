@@ -10,7 +10,7 @@ const WelcomePage = () => {
   const navigate = useNavigate();
   const username = location.state?.username || "[username]";
 
-  const [borrowedItems, setBorrowedItems] = useState([
+  const [borrowedItems] = useState([
     { item: 'Blender', lender: 'Stacey' },
     { item: 'Rake', lender: 'Marcos' },
     { item: 'Car', lender: 'Marcos' },
@@ -22,7 +22,7 @@ const WelcomePage = () => {
     { item: 'Cart', lender: 'Jim' },
   ]);
 
-  const [yourItems] = useState([]);
+  const [yourItems, setYourItems] = useState([]);
   const [newItem, setNewItem] = useState('');
   const [newLender, setNewLender] = useState('');
 
@@ -32,7 +32,7 @@ const WelcomePage = () => {
 
   const handleAddItem = () => {
     if (newItem && newLender) {
-      setBorrowedItems([...borrowedItems, { item: newItem, lender: newLender }]);
+      setYourItems([...yourItems, { item: newItem, lentTo: newLender }]);
       setNewItem('');
       setNewLender('');
     }
