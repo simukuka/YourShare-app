@@ -3,10 +3,16 @@ import {useState} from "react"
 //import 'bootstrap/dist/css/bootstrap.min.css';
 import backbutton from "../images/back-button.png";
 import upload from "../images/image_upload.png";
+import { useNavigate } from "react-router-dom";
 //import { Form } from 'react-bootstrap';
 // import { pages } from "../App";
 
 export const AddItemPage = (props) => {
+  const navigate = useNavigate();
+  const handleOnClick = () => {
+    navigate('/welcome')
+  }
+
   const [image,setImage]=useState(null)
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -20,9 +26,9 @@ export const AddItemPage = (props) => {
   };
   return (
     <Container>
-      <Row md={{ span: 3, offset: 1 }}>
+      <Row md={{ span: 3, offset: 1 }} className="navBar">
         <Col md={1}>
-          <img src={backbutton} width="50px" height="50px" />
+          <img src={backbutton} width="50px" height="50px" alt="back button" onClick={handleOnClick}/>
         </Col>
         <Col md={2}>
           {" "}
@@ -67,12 +73,15 @@ export const AddItemPage = (props) => {
         </Row>
         <Row md={{ span: 8, offset: 2 }}>
           <Col md={10}></Col>
-          <Col md={1}>Cancel</Col>
-          <Col md={1}>
-            {" "}
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+          <Col md={2}>
+            <div onClick={handleOnClick}>
+              Cancel
+            </div>
+            <div>
+              <Button variant="primary" type="submit" onClick={handleOnClick}>
+                Submit
+              </Button>
+            </div>
           </Col>
         </Row>
       </Form>
