@@ -38,6 +38,14 @@ const WelcomePage = () => {
     }
   }
 
+  const handleAdd = () => {
+    navigate('/additem')
+  }
+
+  const handleRowClick = (borrow) => {
+    navigate('/borrow', { state: borrow });
+  }
+
   return (
     <Container className="mt-4">
       <Row className="mb-4 text-start">
@@ -54,7 +62,7 @@ const WelcomePage = () => {
             </thead>
             <tbody>
               {borrowedItems.map((borrow, index) => (
-                <tr key={index}>
+                <tr key={index} onClick={() => handleRowClick(borrow)}>
                   <td className="border">{borrow.item}</td>
                   <td className="border">{borrow.lender}</td>
                 </tr>
@@ -101,7 +109,10 @@ const WelcomePage = () => {
           </Table>
 
           <div className="center-text mt-4 mb-3">
-            <Button variant="secondary" className="mr-2" onClick={handleAddItem}>Add item</Button>
+            <Button variant="secondary" className="mr-2" onClick={handleAddItem}>button</Button>
+          </div>
+          <div className="center-text mb-3">
+            <Button variant="secondary" onClick={ handleAdd }>Add Item</Button>
           </div>
           <div className="center-text">
             <Button variant="secondary" onClick={handleManageCommunity}>Manage community</Button>
