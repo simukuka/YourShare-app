@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Button, Container, Row, Col} from "react-bootstrap";
 //import { Link, useNavigate } from "react-router-dom";
+import "../App.css";
 
 
 const WelcomePage = () => {
@@ -23,12 +24,12 @@ const WelcomePage = () => {
 
   return (
     <Container className="mt-4">
-      <Row className="mb-4">
+      <Row className="mb-4 text-start">
         <h1> Welcome, [username]!</h1>
       </Row>
       <Row>
         <Col md={6}>
-          <Table striped bordered hover>
+          <Table borderless hover>
             <thead>
               <tr>
                 <th>Items for borrowing</th>
@@ -38,15 +39,15 @@ const WelcomePage = () => {
             <tbody>
               {borrowedItems.map((borrow, index) => (
                 <tr key={index}>
-                  <td>{borrow.item}</td>
-                  <td>{borrow.lender}</td>
+                  <td className="border">{borrow.item}</td>
+                  <td className="border">{borrow.lender}</td>
                 </tr>
               ))}
             </tbody>
           </Table>
         </Col>
         <Col md={6}>
-          <Table striped bordered hover>
+          <Table borderless hover>
             <thead>
               <tr>
                 <th>Your items</th>
@@ -56,20 +57,20 @@ const WelcomePage = () => {
             <tbody>
               {yourItems.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.item}</td>
+                    <td className="border">{item.item}</td>
                     <td>{item.lentTo}</td>
                   </tr>
                 ))
               }
               {lentTo.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.item}</td>
-                  <td>{item.lentTo}</td>
+                <tr key={index} className="italic-text">
+                  <td className="border">{item.item}</td>
+                  <td className="border">{item.lentTo}</td>
                 </tr>
               ))}
             </tbody>
           </Table>
-          <div className="mb-3">
+          <div className="mt-4 mb-3">
             <Button variant="secondary" className="mr-2">Add item</Button>
           </div>
           <div className="center-text">

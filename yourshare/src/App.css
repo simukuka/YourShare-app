@@ -42,3 +42,11 @@
   font-size: 25px;
   font-weight: 500;
 }
+
+.italic-text {
+  font-style: italic;
+}
+
+.border {
+  border: solid;
+}
