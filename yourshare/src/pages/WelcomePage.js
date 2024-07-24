@@ -23,57 +23,62 @@ const WelcomePage = () => {
 
   return (
     <Container className="mt-4">
-      <h1> Welcome, [username]!</h1>
+      <Row className="mb-4">
+        <h1> Welcome, [username]!</h1>
+      </Row>
       <Row>
         <Col md={6}>
-          <h4>Items for borrowing</h4>
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Item</th>
+                <th>Items for borrowing</th>
                 <th>Lender</th>
               </tr>
             </thead>
             <tbody>
               {borrowedItems.map((borrow, index) => (
-                
-              )}
+                <tr key={index}>
+                  <td>{borrow.item}</td>
+                  <td>{borrow.lender}</td>
+                </tr>
+              ))}
             </tbody>
           </Table>
         </Col>
+        <Col md={6}>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Your items</th>
+                <th>Lent to</th>
+              </tr>
+            </thead>
+            <tbody>
+              {yourItems.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.item}</td>
+                    <td>{item.lentTo}</td>
+                  </tr>
+                ))
+              }
+              {lentTo.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.item}</td>
+                  <td>{item.lentTo}</td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+          <div className="mb-3">
+            <Button variant="secondary" className="mr-2">Add item</Button>
+          </div>
+          <div className="center-text">
+            <Button variant="secondary">Manage community</Button>
+          </div>
+        </Col>
       </Row>
     </Container>
-  )
-}
+  );
+};
 
-export { WelcomePage };
-
-// function WelcomePage(props) {
-//     return (
-//         <div>
-//             <h1>Welcome, {props.username}!</h1>
-//         </div>
-//     );
-// }
-
-// export const WelcomePage = (props) => {
-//   const navigate = useNavigate();
-//   const handleSubmit = (event)=>{
-//     event.preventDefault();
-//     navigate("/community")
-
-//   };
-//   return (
-//     <div>
-//       <form onSubmit={handleSubmit}>
-//         <label>
-//           Name:
-//           <input type="text" name="name"></input>
-//         </label>
-//         <button type="submit">Submit</button>
-//       </form>
-//      <p> <Link to="/community">Sign In</Link></p>
-
-//     </div>
-//   );
-// };
+export { WelcomePage};
