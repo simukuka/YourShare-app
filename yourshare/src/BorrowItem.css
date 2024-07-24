@@ -1,0 +1,66 @@
+  #row1 {
+    margin-bottom: 20px;
+    margin-top: 20px;   
+  }
+  
+
+  #row1 h1 {
+    font-size: 40px;
+    display: inline-block;
+  }
+  
+  #backIcon {
+    width: 4%;
+    cursor: pointer;
+    margin-right: 15px;
+    margin-bottom: 17px;
+    
+  }
+
+  #row2 {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    margin-top: 10%;
+  }
+  
+  form {
+    width: 40%;
+    height: 100%;
+    display: inline-block;
+  }
+
+  #row2 img {
+    width: 25%;
+    margin-right: 20%;
+    float: right;
+  }
+
+
+  
+  nav {
+    display: inline-block;
+    float: right;
+    margin-top: 5%;
+    margin-right: 10%;
+  }
+  
+  #navbarBottom .nav-link {
+    color: #495057;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 20px 10px;
+    text-align: center;
+  }
+
+  #row3 col{
+    display: inline-block;
+  }
+  
+  #navbarBottom .nav-link:hover {
+    background-color: #495057;
+    color: white;
+  }
+  
+
+  
