@@ -2,22 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-
-import { AddItemPage } from './pages/AddItemPage';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { WelcomePage } from './pages/WelcomePage.js';
 import reportWebVitals from './reportWebVitals';
-
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AddItemPage } from './pages/AddItemPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-
-   
     <Router>
-    <App />
-
+      <App />
     </Router>
 
   </React.StrictMode>
