@@ -3,7 +3,7 @@ import "./App.css";
 import { WelcomePage } from "./pages/WelcomePage";
 import { AddItemPage } from "./pages/AddItemPage";
 import { CommunityPage } from "./pages/CommunityPage";
-import { BorrowItem } from "./pages/BurrowItem";
+import { BorrowItem } from "./pages/BorrowItem";
 import { SignupPage } from "./pages/SignupPage";
 import { Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';

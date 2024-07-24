@@ -9,16 +9,24 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import '../BorrowItem.css';
+import { useNavigate } from "react-router-dom";
 
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 export const BorrowItem = (props) => {
+  const navigate = useNavigate();
+
+  const handleOnClick = () => {
+    navigate('/welcome');
+  }
+
   return (
     <div>
       <Container>
         <Row id = "row1">
-              <Col id = "co1"><img id = "backIcon" src={backButton} alt="Back Button" />
+              <Col id = "co1">
+              <img id = "backIcon" src={backButton} alt="Back Button" onClick={handleOnClick}/>
               <h1>Borrow item</h1></Col>
         </Row>
 
@@ -50,8 +58,8 @@ export const BorrowItem = (props) => {
           <Col>           
             <Navbar bg="None" data-bs-theme="dark" id = "navbarBottom">
               <Nav className="me-auto">
-                <Nav.Link href="#home">Cancel</Nav.Link>
-                <Nav.Link href="#features">Request To Borrow</Nav.Link>
+                <Nav.Link href="#home" onClick={handleOnClick}>Cancel</Nav.Link>
+                <Nav.Link href="#features" onClick={handleOnClick}>Request To Borrow</Nav.Link>
               </Nav>
             </Navbar>
           </Col>
