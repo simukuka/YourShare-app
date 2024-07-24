@@ -21,26 +21,7 @@ function App() {
    
   
   <div className="App">
-     <nav>
-      <ul>
-        <ul>
-          <Link to="/">Signup Page</Link>
-        </ul>
-        <ul>
-          <Link to="/welcome">Welcome Page</Link>
-        </ul>
-        <ul>
-          <Link to="/community">Community Page</Link>
-          
-        </ul>
-        <ul>
-          <Link to="/additem">Add Item</Link>
-        </ul>
-        <ul>
-          <Link to="/borrow">Borrow Page</Link>
-        </ul>
-      </ul>
-    </nav>
+
     
     <Routes>
       <Route path="/" element={<SignupPage/>}/>

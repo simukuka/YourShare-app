@@ -22,7 +22,7 @@ const WelcomePage = () => {
     { item: 'Cart', lender: 'Jim' },
   ]);
 
-  const [yourItems, setYourItems] = useState([]);
+  const [yourItems] = useState([]);
   const [newItem, setNewItem] = useState('');
   const [newLender, setNewLender] = useState('');
 
