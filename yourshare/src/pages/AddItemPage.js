@@ -8,22 +8,61 @@ import { useNavigate } from "react-router-dom";
 // import { pages } from "../App";
 
 export const AddItemPage = (props) => {
+  const [image,setImage]=useState(null)
+  const [formData, setFormData] = useState({
+    itemName: '',
+    itemType: '',
+    textarea: '',
+    file: null, // State to store the selected file
+  });
+
+
   const navigate = useNavigate();
   const handleOnClick = () => {
     navigate('/welcome')
   }
+  const handleInputChange = (event) => {
+    if (event.target.name === 'file') {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.files[0],
+      });
 
-  const [image,setImage]=useState(null)
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+      // Image preview
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(event.target.files[0]);
+    } else {
+      setFormData({
+        ...formData,
+        [event.target.name]: event.target.value,
+      });
     }
   };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Prepare form data to be sent
+    const formDataToSend = new FormData();
+    formDataToSend.append('itemName', formData.itemName);
+    formDataToSend.append('itemType', formData.itemType);
+    formDataToSend.append('textarea', formData.textarea);
+    formDataToSend.append('file', formData.file); // Append the file to form data
+
+    // Replace with your form submission logic (e.g., fetch or Axios request)
+    console.log(formDataToSend);
+
+    // Reset form fields if needed
+    setFormData({
+      itemName: '',
+      itemType: '',
+      textarea: '',
+      file: null,
+    });
+  };
+  
+ 
   return (
     <Container>
       <Row md={{ span: 3, offset: 1 }} className="navBar">
@@ -35,32 +74,44 @@ export const AddItemPage = (props) => {
           <h2>Add Item</h2>
         </Col>
       </Row>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Row md={8}>
           <Col md={6} className="justify-center">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Group className="mb-3" controlId="itemName">
               <Form.Label>Item Name</Form.Label>
-              <Form.Control type="email" />
+              <Form.Control type="text"
+              name="itemName"
+              value={formData.itemName}
+              onChange={handleInputChange} 
+              required/>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
               <Form.Label> Type: </Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+              <Form.Control type="text" placeholder="Password"
+              name="itemType"
+              value={formData.itemType}
+              onChange={handleInputChange} 
+              required/>
             </Form.Group>
             <Form.Group
               className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
+              controlId="textArea"
             >
-              <Form.Control as="textarea" rows={3} placeholder="Description" />
+              <Form.Control as="textarea" rows={3} placeholder="Description" 
+              name="textarea"
+              value={formData.textarea}
+              onChange={handleInputChange}/>
             </Form.Group>
           </Col>
           <Col md={6} className="text-center">
-            <Form.Group controlId="formFile">
+            <Form.Group controlId="file">
               <Form.Label>Select Image</Form.Label>
               <Form.Control
                 type="file"
+                name="file"
                 accept=".png, .jpg, .jpeg"
-                onChange={handleImageChange}
+                onChange={handleInputChange}
                 required
               />
               {image && (
