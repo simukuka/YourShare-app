@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -38,9 +38,9 @@ export const CommunityPage = (props) => {
       <Container style={{ fontSize: 20 }}>
         <Row className="my-2">
           <Col md="4" style={{ display: 'flex', alignItems: 'center' }}>
-            <Button variant="link" onClick={() => navigate(-1)} style={{ padding: 0, border: 'none', background: 'none' }}>
+            <Link variant="link" to="/" style={{ padding: 0, border: 'none', background: 'none' }}>
               <Image src={Y_s} rounded style={{ width: "50px", height: "auto" }} />
-            </Button>
+            </Link>
             <h2 style={{ marginLeft: '10px', paddingTop: 10 }}>Manage Community</h2>
           </Col>
         </Row>
