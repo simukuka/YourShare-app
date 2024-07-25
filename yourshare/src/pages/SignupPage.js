@@ -10,7 +10,14 @@ function SignupPage(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate('/welcome', {state: { username } });
+    if (username) {
+      navigate('/welcome', {state: { username } });
+    }
+  };
+
+  const handleLinkClick = (e) => {
+    e.preventDefault();
+    document.getElementById('signupForm').requestSubmit();
   };
 
   return (
@@ -29,7 +36,7 @@ function SignupPage(props) {
         <Col md={6}>
           <div className="mt-5">
             <h1 className="mb-4">Join your community</h1>
-            <Form className="form" onSubmit={handleSubmit}>
+            <Form id="signupForm" className="form" onSubmit={handleSubmit}>
               <FormLabel><h3>Sign-up</h3></FormLabel>
               <Form.Group controlId="formUsername">
                 <Form.Control 
@@ -50,14 +57,14 @@ function SignupPage(props) {
               </Form.Group>
 
               <div className="text-end">
-                <Button variant="secondary" type="submit" style={{ width: '25%' }} >
+                <Button variant="secondary" type="submit" style={{ width: '50%' }} >
                   Join
                 </Button>
               </div>
             </Form>
           </div>
           <div className="mt-3 text-start">
-            <a href="/welcome" className="custom-link">Sign-in</a>
+            <a href="/welcome" className="custom-link" onClick={handleLinkClick}>Sign-in</a>
           </div>
         </Col>
       </Row>

@@ -5,9 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const AddItemPage = (props) => {
   const navigate = useNavigate();
-  const handleOnClick = () => {
-    navigate('/welcome')
-  }
+  
 
   const [image,setImage]=useState(null)
   const [formData, setFormData] = useState({
@@ -39,10 +37,8 @@ export const AddItemPage = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.itemName && formData.type && formData.description && image) {
-      // Handle form submission
-      console.log("Form data:", formData);
-      console.log("Image data:", image);
-      handleOnClick();
+      // Handle to WelcomePage with the form data
+      navigate('/welcome', { state: { formData, image } });
     } else{
       alert("Please fill out all fields and upload an iamge.");
     }
@@ -110,7 +106,7 @@ export const AddItemPage = (props) => {
               )}
             </Form.Group>
 
-              <div onClick={handleOnClick} className="mt-2 mb-3">
+              <div onClick={()=> navigate('/welcome')} className="mt-2 mb-3">
                 Cancel
               </div>
               <Button variant="secondary" type="submit">
