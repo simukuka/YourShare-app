@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -10,7 +10,7 @@ import Image from 'react-bootstrap/Image';
 import Y_s from "../images/back-button.png";
 
 export const CommunityPage = (props) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [friends, setFriends] = useState([
     { name: 'Jazmin', borrowed: 'None', lent: 'Back Pack', bestFriend: true },
     { name: 'Lee', borrowed: 'None', lent: 'None', bestFriend: false },
