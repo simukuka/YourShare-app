@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -12,9 +12,9 @@ import Y_s from "../images/back-button.png";
 export const CommunityPage = (props) => {
   const navigate = useNavigate();
   const [friends, setFriends] = useState([
-    { name: 'Stacey', borrowed: 'None', lent: 'None', bestFriend: true },
+    { name: 'Stacey', borrowed: 'None', lent: 'Back Pack', bestFriend: true },
     { name: 'Marcos', borrowed: 'None', lent: 'None', bestFriend: false },
-    { name: 'Cam', borrowed: 'None', lent: 'None', bestFriend: true },
+    { name: 'Cam', borrowed: 'Note Book', lent: 'None', bestFriend: true },
     { name: 'Jim', borrowed: 'None', lent: 'None', bestFriend: false }
   ]);
   const [newFriend, setNewFriend] = useState({ name: '', borrowed: 'None', lent: 'None', bestFriend: false });
@@ -38,9 +38,9 @@ export const CommunityPage = (props) => {
       <Container style={{ fontSize: 20 }}>
         <Row className="my-2">
           <Col md="4" style={{ display: 'flex', alignItems: 'center' }}>
-            <Button variant="link" onClick={() => navigate(-1)} style={{ padding: 0, border: 'none', background: 'none' }}>
+            <Link variant="link" to="/" style={{ padding: 0, border: 'none', background: 'none' }}>
               <Image src={Y_s} rounded style={{ width: "50px", height: "auto" }} />
-            </Button>
+            </Link>
             <h2 style={{ marginLeft: '10px', paddingTop: 10 }}>Manage Community</h2>
           </Col>
         </Row>
@@ -68,10 +68,10 @@ export const CommunityPage = (props) => {
             </Table>
           </Col>
         </Row>
-        <Row>
+        <Row  style={{ textAlign: 'left' }} >
           <Col md="12">
             <Form onSubmit={handleAddFriend}>
-              <Row>
+              <Row >
                 <Col md="3">
                   <Form.Group controlId="formFriendName">
                     <Form.Control
@@ -80,19 +80,19 @@ export const CommunityPage = (props) => {
                       name="name"
                       value={newFriend.name}
                       onChange={handleNewFriendChange}
-                      required
+
                     />
                   </Form.Group>
                 </Col>
               </Row>
-              <Col md="2" className="d-flex align-items-end" style={{ paddingTop: 12 }}>
+              <Col md="4" className="d-flex align-items-end" style={{ paddingTop: 12 }}>
                 <Button variant="secondary" type="submit">Add Friend</Button>
               </Col>
             </Form>
           </Col>
         </Row>
-        <Row className="mt-3">
-          <Col md="12">
+        <Row className="mt-3" style={{ textAlign: 'left' }}>
+          <Col md="12" >
             <Form style={{ textAlign: 'left' }}>
               <Form.Check type="checkbox" label="Text me when someone wants to borrow an item" defaultChecked />
               <Form.Check type="checkbox" label="Allow best friends to auto borrow without approval" defaultChecked />
