@@ -39,7 +39,13 @@ export const AddItemPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.itemName && formData.type && formData.description && image) {
-      // Handle to WelcomePage with the form data
+      const newItem = { ...formData, image, lender: username };
+      // Get existing items from local storage
+      const existingItems = JSON.parse(localStorage.getItem('yourItems')) || [];
+      const updatedItems = [...existingItems, newItem];
+      // Save updated items to local storage
+      localStorage.setItem('yourItems', JSON.stringify(updatedItems));
+
       navigate('/welcome', { state: { formData, image, username } });
     } else{
       alert("Please fill out all fields and upload an iamge.");

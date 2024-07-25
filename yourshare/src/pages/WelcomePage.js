@@ -8,7 +8,7 @@ import "../App.css";
 const WelcomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const [username, setUsername] = useState(localStorage.getItem('username')) || "[username]";
+  const [username] = useState(localStorage.getItem('username')) || "[username]";
 
   const [borrowedItems, setBorrowedItems] = useState([
     { item: 'Blender', lender: 'Stacey' },
@@ -25,12 +25,20 @@ const WelcomePage = () => {
   const [yourItems, setYourItems] = useState([]);
 
   useEffect(() => {
+    const storedItems = JSON.parse(localStorage.getItem('yourItems')) || [];
+    setYourItems(storedItems);
+
     if (location.state && location.state.formData && location.state.image && location.state.username) {
       const { formData, image, username: itemLender } = location.state;
+      const newItem = { ...formData, image };
+
+      // Add new item to both yourItems and borrowedItems
       setYourItems((prevItems) => { 
-        const itemExists = prevItems.some(item => item.itemName === formData.itemName && item.image === image);
+        const itemExists = prevItems.some(item => item.itemName === newItem.itemName && item.image === newItem.image);
         if (!itemExists) {
-          return [...prevItems, { ...formData, image }];
+          const updatedItems = [...prevItems, newItem];
+          localStorage.setItem('yourItems', JSON.stringify(updatedItems));
+          return updatedItems;
         }
         return prevItems;
       });
@@ -55,6 +63,11 @@ const WelcomePage = () => {
 
   const handleRowClick = (borrow) => {
     navigate('/borrow', { state: borrow });
+  }
+
+  const handleClearItems = () => {
+    localStorage.removeItem('yourItems');
+    setYourItems([]);
   }
 
   return (
@@ -110,7 +123,11 @@ const WelcomePage = () => {
               )}
             </tbody>
           </Table>
-
+          <div className="center-text mb-3">
+            <Button variant="secondary" onClick={handleClearItems}>
+              Clear Items
+            </Button>
+          </div>
           <div className="center-text mb-3">
             <Button variant="secondary" onClick={ handleAdd }>Add Item</Button>
           </div>
