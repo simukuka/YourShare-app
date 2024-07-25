@@ -85,7 +85,7 @@ export const CommunityPage = (props) => {
                   <th>Item currently borrowed</th>
                   <th>Item currently lent</th>
                   <th>Best friend</th>
-                  <th>Actions</th>
+
                 </tr>
               </thead>
               <tbody>
