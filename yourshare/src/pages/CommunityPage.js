@@ -12,10 +12,10 @@ import Y_s from "../images/back-button.png";
 export const CommunityPage = (props) => {
   const navigate = useNavigate();
   const [friends, setFriends] = useState([
-    { name: 'Stacey', borrowed: 'None', lent: 'Back Pack', bestFriend: true },
-    { name: 'Marcos', borrowed: 'None', lent: 'None', bestFriend: false },
-    { name: 'Cam', borrowed: 'Note Book', lent: 'None', bestFriend: true },
-    { name: 'Jim', borrowed: 'None', lent: 'None', bestFriend: false }
+    { name: 'Jazmin', borrowed: 'None', lent: 'Back Pack', bestFriend: true },
+    { name: 'Lee', borrowed: 'None', lent: 'None', bestFriend: false },
+    { name: 'Obianaju', borrowed: 'Water Bottle', lent: 'Text Book', bestFriend: true },
+    { name: 'Prithvi', borrowed: 'Phone Charger', lent: 'None', bestFriend: false }
   ]);
   const [newFriend, setNewFriend] = useState({ name: '', borrowed: 'None', lent: 'None', bestFriend: false });
 
