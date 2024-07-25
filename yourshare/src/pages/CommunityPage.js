@@ -33,6 +33,13 @@ export const CommunityPage = (props) => {
     }));
   };
 
+  const handleCheckboxChange = (index) => {
+    console.log(`Checkbox clicked for index: ${index}`); // Debugging log
+    setFriends(friends.map((friend, i) =>
+      i === index ? { ...friend, bestFriend: !friend.bestFriend } : friend
+    ));
+  };
+
   return (
     <>
       <Container style={{ fontSize: 20 }}>
@@ -61,17 +68,23 @@ export const CommunityPage = (props) => {
                     <td>{friend.name}</td>
                     <td>{friend.borrowed}</td>
                     <td>{friend.lent}</td>
-                    <td><Form.Check type="checkbox" checked={friend.bestFriend} readOnly /></td>
+                    <td>
+                      <Form.Check
+                        type="checkbox"
+                        checked={friend.bestFriend}
+                        onChange={() => handleCheckboxChange(index)}
+                      />
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </Table>
           </Col>
         </Row>
-        <Row  style={{ textAlign: 'left' }} >
+        <Row style={{ textAlign: 'left' }}>
           <Col md="12">
             <Form onSubmit={handleAddFriend}>
-              <Row >
+              <Row>
                 <Col md="3">
                   <Form.Group controlId="formFriendName">
                     <Form.Control
@@ -80,7 +93,6 @@ export const CommunityPage = (props) => {
                       name="name"
                       value={newFriend.name}
                       onChange={handleNewFriendChange}
-
                     />
                   </Form.Group>
                 </Col>
@@ -92,7 +104,7 @@ export const CommunityPage = (props) => {
           </Col>
         </Row>
         <Row className="mt-3" style={{ textAlign: 'left' }}>
-          <Col md="12" >
+          <Col md="12">
             <Form style={{ textAlign: 'left' }}>
               <Form.Check type="checkbox" label="Text me when someone wants to borrow an item" defaultChecked />
               <Form.Check type="checkbox" label="Allow best friends to auto borrow without approval" defaultChecked />
