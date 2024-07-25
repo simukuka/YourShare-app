@@ -34,19 +34,19 @@ export const BorrowItem = (props) => {
           <Col>
               <Form>
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                  <Form.Control type="email" placeholder="Item name: " />
+                  <Form.Control type="email" placeholder="Item name: Blender" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                  <Form.Control type="email" placeholder="Type: " />
+                  <Form.Control type="email" placeholder="Type: Kitchen" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
-                  <Form.Control type="email" placeholder="Lender: " />
+                  <Form.Control type="email" placeholder="Lender: Stacey" />
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea4">
-                  <Form.Control as="textarea" rows={3} />
+                  <Form.Control as="textarea" rows={3} placeholder="The lid is a little loose so make sure to hold it tight to avoid a smoothie disaster! " />
                 </Form.Group>
               </Form>
 
