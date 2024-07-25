@@ -1,11 +1,7 @@
 import { Button, Form, Col, Row, Container,Image } from "react-bootstrap";
 import {useState} from "react"
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import backbutton from "../images/back-button.png";
-import upload from "../images/image_upload.png";
 import { useNavigate } from "react-router-dom";
-//import { Form } from 'react-bootstrap';
-// import { pages } from "../App";
 
 export const AddItemPage = (props) => {
   const navigate = useNavigate();
@@ -14,6 +10,13 @@ export const AddItemPage = (props) => {
   }
 
   const [image,setImage]=useState(null)
+  const [formData, setFormData] = useState({
+    itemName: '',
+    type: '',
+    description: '',
+  });
+
+
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -24,36 +27,72 @@ export const AddItemPage = (props) => {
       reader.readAsDataURL(file);
     }
   };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    })
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.itemName && formData.type && formData.description && image) {
+      // Handle form submission
+      console.log("Form data:", formData);
+      console.log("Image data:", image);
+      handleOnClick();
+    } else{
+      alert("Please fill out all fields and upload an iamge.");
+    }
+  };
+
   return (
     <Container>
-      <Row md={{ span: 3, offset: 1 }} className="navBar">
-        <Col md={1}>
-          <img src={backbutton} width="50px" height="50px" alt="back button" onClick={handleOnClick}/>
-        </Col>
-        <Col md={2}>
-          {" "}
-          <h2>Add Item</h2>
+      <Row className="my-2">
+        <Col md="4" style={{ display: 'flex', alignItems: 'center' }}>
+          <Button variant="link" onClick={() => navigate(-1)} style={{ padding: 0, border: 'none', background: 'none' }}>
+            <Image src={backbutton} rounded style={{ width: "50px", height: "auto" }} />
+          </Button>
+          <h2 style={{ marginLeft: '10px', paddingTop: 10 }}>Add Item</h2>
         </Col>
       </Row>
-      <Form>
-        <Row md={8}>
-          <Col md={6} className="justify-center">
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Item Name</Form.Label>
-              <Form.Control type="email" />
+      <Form onSubmit={handleSubmit}>
+        <Row>
+          <Col md={6}>
+            <Form.Group className="mb-3" controlId="itemName">
+              <Form.Control 
+                type="text"
+                placeholder="Item Name:"
+                name="itemName"
+                value={formData.itemName}
+                onChange={handleChange}
+              />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label> Type: </Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+            <Form.Group className="mb-3" controlId="type">
+              <Form.Control 
+                type="text" 
+                placeholder="Type:"
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+              />
             </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Control as="textarea" rows={3} placeholder="Description" />
+
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+              <Form.Control 
+                as="textarea" 
+                rows={3} 
+                placeholder="Description"
+                name="description"
+                value={formData.description}
+                onChange={handleChange} 
+              />
             </Form.Group>
           </Col>
+
           <Col md={6} className="text-center">
             <Form.Group controlId="formFile">
               <Form.Label>Select Image</Form.Label>
@@ -63,25 +102,21 @@ export const AddItemPage = (props) => {
                 onChange={handleImageChange}
                 required
               />
+
               {image && (
                 <div className="mt-2">
                   <Image src={image} alt="Preview" thumbnail />
                 </div>
               )}
             </Form.Group>
-          </Col>
-        </Row>
-        <Row md={{ span: 8, offset: 2 }}>
-          <Col md={10}></Col>
-          <Col md={2}>
-            <div onClick={handleOnClick}>
-              Cancel
-            </div>
-            <div>
-              <Button variant="primary" type="submit" onClick={handleOnClick}>
-                Submit
+
+              <div onClick={handleOnClick} className="mt-2 mb-3">
+                Cancel
+              </div>
+              <Button variant="secondary" type="submit">
+                Add item
               </Button>
-            </div>
+
           </Col>
         </Row>
       </Form>

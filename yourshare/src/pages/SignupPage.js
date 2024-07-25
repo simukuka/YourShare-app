@@ -42,15 +42,15 @@ function SignupPage(props) {
               </Form.Group>
 
               <Form.Group controlId="formPhoneNumber">
-                <Form.Control type="text" placeholder="Phone number:" className="mb-5" />
+                <Form.Control type="text" placeholder="Phone number:" className="mb-5" required/>
               </Form.Group>
 
               <Form.Group controlId="formZipCode">
-                <Form.Control type="text" placeholder="Zip code:" className="mb-5" />
+                <Form.Control type="text" placeholder="Zip code:" className="mb-5"  />
               </Form.Group>
 
               <div className="text-end">
-                <Button variant="secondary" type="submit" style={{ width: '25%' }}>
+                <Button variant="secondary" type="submit" style={{ width: '25%' }} >
                   Join
                 </Button>
               </div>
