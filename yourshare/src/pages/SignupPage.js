@@ -11,6 +11,7 @@ function SignupPage(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username) {
+      localStorage.setItem('username', username);
       navigate('/welcome', {state: { username } });
     }
   };

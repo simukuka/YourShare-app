@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Table, Button, Container, Row, Col, Form} from "react-bootstrap";
+import { Table, Button, Container, Row, Col } from "react-bootstrap";
 import "../App.css";
 
 
 const WelcomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const username = location.state?.username || "[username]";
-  const newItemData = location.state;
+  const [username, setUsername] = useState(localStorage.getItem('username')) || "[username]";
 
-  const [borrowedItems] = useState([
+  const [borrowedItems, setBorrowedItems] = useState([
     { item: 'Blender', lender: 'Stacey' },
     { item: 'Rake', lender: 'Marcos' },
     { item: 'Car', lender: 'Marcos' },
@@ -26,8 +25,8 @@ const WelcomePage = () => {
   const [yourItems, setYourItems] = useState([]);
 
   useEffect(() => {
-    if (newItemData && newItemData.formData && newItemData.image) {
-      const { formData, image } = newItemData;
+    if (location.state && location.state.formData && location.state.image && location.state.username) {
+      const { formData, image, username: itemLender } = location.state;
       setYourItems((prevItems) => { 
         const itemExists = prevItems.some(item => item.itemName === formData.itemName && item.image === image);
         if (!itemExists) {
@@ -36,9 +35,15 @@ const WelcomePage = () => {
         return prevItems;
       });
 
-      location.state = {}
+      setBorrowedItems((prevItems) => [
+        ...prevItems,
+        { item: formData.itemName, lender: itemLender }
+      ]);
+
+      location.state = {};
     }
-  }, [newItemData, location]);
+  }, [location]);
+
 
   const handleManageCommunity = () => {
     navigate('/community');

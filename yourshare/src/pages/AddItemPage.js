@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export const AddItemPage = (props) => {
   const navigate = useNavigate();
+  const username = localStorage.getItem('username');
   
 
   const [image,setImage]=useState(null)
@@ -38,7 +39,7 @@ export const AddItemPage = (props) => {
     e.preventDefault();
     if (formData.itemName && formData.type && formData.description && image) {
       // Handle to WelcomePage with the form data
-      navigate('/welcome', { state: { formData, image } });
+      navigate('/welcome', { state: { formData, image, username } });
     } else{
       alert("Please fill out all fields and upload an iamge.");
     }
