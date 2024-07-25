@@ -1,19 +1,20 @@
   #row1 {
     margin-bottom: 20px;
-    margin-top: 20px;   
+    margin-top: 20px;  
+    
   }
   
 
   #row1 h1 {
     font-size: 40px;
-    display: inline-block;
+    float: left;
   }
   
   #backIcon {
     width: 4%;
     cursor: pointer;
     margin-right: 15px;
-    margin-bottom: 17px;
+    float: left;
     
   }
 
@@ -39,7 +40,6 @@
 
   
   nav {
-    display: inline-block;
     float: right;
     margin-top: 5%;
     margin-right: 10%;
