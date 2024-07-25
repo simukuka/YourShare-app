@@ -123,12 +123,12 @@ const WelcomePage = () => {
               )}
             </tbody>
           </Table>
-          <div className="center-text mb-3">
-            <Button variant="secondary" onClick={handleClearItems}>
+          <div className="text-end mt-3">
+            <Button variant="outline-secondary" onClick={handleClearItems} size="sm">
               Clear Items
             </Button>
           </div>
-          <div className="center-text mb-3">
+          <div className="center-text mt-3 mb-3">
             <Button variant="secondary" onClick={ handleAdd }>Add Item</Button>
           </div>
           <div className="center-text">
