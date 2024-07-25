@@ -38,7 +38,7 @@ export const CommunityPage = (props) => {
       <Container style={{ fontSize: 20 }}>
         <Row className="my-2">
           <Col md="4" style={{ display: 'flex', alignItems: 'center' }}>
-            <Link variant="link" to="/" style={{ padding: 0, border: 'none', background: 'none' }}>
+            <Link variant="link" to="/welcome" style={{ padding: 0, border: 'none', background: 'none' }}>
               <Image src={Y_s} rounded style={{ width: "50px", height: "auto" }} />
             </Link>
             <h2 style={{ marginLeft: '10px', paddingTop: 10 }}>Manage Community</h2>
