@@ -14,7 +14,7 @@ export const CommunityPage = (props) => {
   const [friends, setFriends] = useState([
     { name: 'Jazmin', borrowed: 'None', lent: 'Back Pack', bestFriend: true },
     { name: 'Lee', borrowed: 'None', lent: 'None', bestFriend: false },
-    { name: 'Obianaju', borrowed: 'Water Bottle', lent: 'Text Book', bestFriend: true },
+    { name: 'Obianuju', borrowed: 'Water Bottle', lent: 'Text Book', bestFriend: true },
     { name: 'Prithvi', borrowed: 'Phone Charger', lent: 'None', bestFriend: false }
   ]);
   const [newFriend, setNewFriend] = useState({ name: '', borrowed: 'None', lent: 'None', bestFriend: false });
