@@ -23,6 +23,8 @@ export const CommunityPage = (props) => {
 
   const [friends, setFriends] = useState(loadFriendsFromLocalStorage);
   const [newFriend, setNewFriend] = useState({ name: '', borrowed: 'None', lent: 'None', bestFriend: false });
+  const [itemBorrowed, setItemBorrowed] = useState('');
+  const [itemLent, setItemLent] = useState('');
 
   // Update localStorage whenever friends state changes
   useEffect(() => {
@@ -49,6 +51,20 @@ export const CommunityPage = (props) => {
     ));
   };
 
+  const handleUpdateBorrowedItem = (index) => {
+    setFriends(friends.map((friend, i) =>
+      i === index ? { ...friend, borrowed: itemBorrowed } : friend
+    ));
+    setItemBorrowed('');
+  };
+
+  const handleUpdateLentItem = (index) => {
+    setFriends(friends.map((friend, i) =>
+      i === index ? { ...friend, lent: itemLent } : friend
+    ));
+    setItemLent('');
+  };
+
   return (
     <>
       <Container style={{ fontSize: 20 }}>
@@ -69,14 +85,47 @@ export const CommunityPage = (props) => {
                   <th>Item currently borrowed</th>
                   <th>Item currently lent</th>
                   <th>Best friend</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {friends.map((friend, index) => (
                   <tr key={index}>
                     <td>{friend.name}</td>
-                    <td>{friend.borrowed}</td>
-                    <td>{friend.lent}</td>
+                    <td>
+                      {friend.borrowed}
+                      <Form.Control
+                        type="text"
+                        value={itemBorrowed}
+                        onChange={(e) => setItemBorrowed(e.target.value)}
+                        placeholder="Update borrowed item"
+                        style={{ marginTop: '5px' }}
+                      />
+                      <Button
+                        variant="primary"
+                        onClick={() => handleUpdateBorrowedItem(index)}
+                        style={{ marginTop: '5px' }}
+                      >
+                        Update Borrowed Item
+                      </Button>
+                    </td>
+                    <td>
+                      {friend.lent}
+                      <Form.Control
+                        type="text"
+                        value={itemLent}
+                        onChange={(e) => setItemLent(e.target.value)}
+                        placeholder="Update lent item"
+                        style={{ marginTop: '5px' }}
+                      />
+                      <Button
+                        variant="primary"
+                        onClick={() => handleUpdateLentItem(index)}
+                        style={{ marginTop: '5px' }}
+                      >
+                        Update Lent Item
+                      </Button>
+                    </td>
                     <td>
                       <Form.Check
                         type="checkbox"
