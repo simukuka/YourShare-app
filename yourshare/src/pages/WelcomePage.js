@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Table, Button, Container, Row, Col, Form} from "react-bootstrap";
@@ -9,8 +9,9 @@ const WelcomePage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const username = location.state?.username || "[username]";
+  const newItemData = location.state;
 
-  const [borrowedItems, setBorrowedItems] = useState([
+  const [borrowedItems] = useState([
     { item: 'Blender', lender: 'Stacey' },
     { item: 'Rake', lender: 'Marcos' },
     { item: 'Car', lender: 'Marcos' },
@@ -22,20 +23,25 @@ const WelcomePage = () => {
     { item: 'Cart', lender: 'Jim' },
   ]);
 
-  const [yourItems] = useState([]);
-  const [newItem, setNewItem] = useState('');
-  const [newLender, setNewLender] = useState('');
+  const [yourItems, setYourItems] = useState([]);
+
+  useEffect(() => {
+    if (newItemData && newItemData.formData && newItemData.image) {
+      const { formData, image } = newItemData;
+      setYourItems((prevItems) => { 
+        const itemExists = prevItems.some(item => item.itemName === formData.itemName && item.image === image);
+        if (!itemExists) {
+          return [...prevItems, { ...formData, image }];
+        }
+        return prevItems;
+      });
+
+      location.state = {}
+    }
+  }, [newItemData, location]);
 
   const handleManageCommunity = () => {
     navigate('/community');
-  }
-
-  const handleAddItem = () => {
-    if (newItem && newLender) {
-      setBorrowedItems([...borrowedItems, { item: newItem, lender: newLender }]);
-      setNewItem('');
-      setNewLender('');
-    }
   }
 
   const handleAdd = () => {
@@ -83,34 +89,23 @@ const WelcomePage = () => {
             <tbody>
               {yourItems.map((item, index) => (
                 <tr key={index}>
-                  <td className="border">{item.item}</td>
-                  <td className="border">{item.lentTo}</td>
+                  <td className="border">{item.itemName}</td>
+                  <td className="border"> n/a </td>
                 </tr>
               ))}
+              {yourItems.length === 0 && (
               <tr>
                 <td className="border">
-                  <Form.Control
-                    type="text"
-                    placeholder="Add your first item"
-                    value={newItem}
-                    onChange={(e) => setNewItem(e.target.value)}
-                  />
+                  <i>Add your first item</i>
                 </td>
                 <td className="border">
-                  <Form.Control
-                    type="text"
-                    placeholder="A friend"
-                    value={newLender}
-                    onChange={(e) => setNewLender(e.target.value)}
-                  />
+                  <i>A friend</i>
                 </td>
               </tr>
+              )}
             </tbody>
           </Table>
 
-          <div className="center-text mt-4 mb-3">
-            <Button variant="secondary" className="mr-2" onClick={handleAddItem}>button</Button>
-          </div>
           <div className="center-text mb-3">
             <Button variant="secondary" onClick={ handleAdd }>Add Item</Button>
           </div>

@@ -1,154 +1,130 @@
-import { Button, Form, Col, Row, Container, Image } from "react-bootstrap";
-import { useState } from "react";
-//import 'bootstrap/dist/css/bootstrap.min.css';
-import backbutton from "../images/back-button.png";
-import upload from "../images/image_upload.png";
-import { useNavigate } from "react-router-dom";
-//import { Form } from 'react-bootstrap';
-// import { pages } from "../App";
+import React, { useState } from 'react';
+import { Button, Form, Col, Row, Container, Image } from 'react-bootstrap';
+import backbutton from '../images/back-button.png';
+import { useNavigate } from 'react-router-dom';
 
-export const AddItemPage = (props) => {
+export const AddItemPage = () => {
+  const navigate = useNavigate();
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
-    itemName: "",
-    itemType: "",
-    textarea: "",
-    file: null, // State to store the selected file
+    itemName: '',
+    type: '',
+    description: '',
   });
 
-  const navigate = useNavigate();
-  const handleOnClick = () => {
-    navigate("/welcome");
-  };
-  const handleInputChange = (event) => {
-    if (event.target.name === "file") {
-      setFormData({
-        ...formData,
-        [event.target.name]: event.target.files[0],
-      });
 
-      // Image preview
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result);
       };
-      reader.readAsDataURL(event.target.files[0]);
-    } else {
-      setFormData({
-        ...formData,
-        [event.target.name]: event.target.value,
-      });
+      reader.readAsDataURL(file);
     }
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Prepare form data to be sent
-    const formDataToSend = new FormData();
-    formDataToSend.append("itemName", formData.itemName);
-    formDataToSend.append("itemType", formData.itemType);
-    formDataToSend.append("textarea", formData.textarea);
-    formDataToSend.append("file", formData.file); // Append the file to form data
 
-    // Replace with your form submission logic (e.g., fetch or Axios request)
-    console.log(formDataToSend);
 
-    // Reset form fields if needed
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
-      itemName: "",
-      itemType: "",
-      textarea: "",
-      file: null,
+      ...formData,
+      [name]: value,
     });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.itemName && formData.type && formData.description && image) {
+     
+      navigate('/welcome', { state: { formData, image } });
+    } else {
+      alert('Please fill out all fields and upload an image.');
+    }
   };
 
   return (
     <Container>
-      <Row md={{ span: 3, offset: 1 }} className="navBar">
-        <Col md={1}>
-          <img
-            src={backbutton}
-            width="50px"
-            height="50px"
-            alt="back button"
-            onClick={handleOnClick}
-          />
-        </Col>
-        <Col md={2}>
-          {" "}
-          <h2>Add Item</h2>
+      <Row className="my-2">
+        <Col md="4" className="d-flex align-items-center">
+          <Button variant="link" onClick={() => navigate(-1)} style={{ padding: 0, border: 'none', background: 'none' }}>
+            <Image src={backbutton} rounded style={{ width: '50px', height: 'auto' }} />
+          </Button>
+          <h2 style={{ marginLeft: '10px', paddingTop: 10 }}>Add Item</h2>
         </Col>
       </Row>
+
       <Form onSubmit={handleSubmit}>
-        <Row md={8}>
-          <Col md={6} className="justify-center">
+        <Row>
+          <Col md={6} className="mb-3">
             <Form.Group className="mb-3" controlId="itemName">
-              <Form.Label>Item Name</Form.Label>
               <Form.Control
                 type="text"
+                placeholder="Item Name"
                 name="itemName"
                 value={formData.itemName}
-                onChange={handleInputChange}
+                onChange={handleChange}
                 required
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label> Type: </Form.Label>
+            <Form.Group className="mb-3" controlId="type">
               <Form.Control
                 type="text"
-                placeholder="Password"
-                name="itemType"
-                value={formData.itemType}
-                onChange={handleInputChange}
+                placeholder="Type"
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
                 required
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="textArea">
+
+            <Form.Group className="mb-3" controlId="description">
               <Form.Control
                 as="textarea"
                 rows={3}
                 placeholder="Description"
-                name="textarea"
-                value={formData.textarea}
-                onChange={handleInputChange}
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+                required
               />
             </Form.Group>
           </Col>
-          <Col md={6} className="text-center">
+
+          <Col md={6} className="mb-3 text-center">
             <Form.Group controlId="file">
               <Form.Label>Select Image</Form.Label>
               <Form.Control
                 type="file"
                 name="file"
                 accept=".png, .jpg, .jpeg"
-                onChange={handleInputChange}
+                onChange={handleImageChange}
                 required
               />
+
               {image && (
                 <div className="mt-2">
                   <Image src={image} alt="Preview" thumbnail />
                 </div>
               )}
-              {!image && (
-                <div className="mt-2">
-                  <Image src={upload} alt="Upload Icon" />
-                </div>
-              )}
             </Form.Group>
           </Col>
         </Row>
-        <Row md={{ span: 8, offset: 2 }}>
-          <Col md={10}></Col>
-          <Col md={2}>
-            <div onClick={handleOnClick}>Cancel</div>
-            <div>
-              <Button variant="primary" type="submit" onClick={handleOnClick}>
-                Submit
-              </Button>
-            </div>
+
+        <Row>
+          <Col md={12} className="d-flex justify-content-end">
+            <Button variant="outline-secondary" onClick={() => navigate(-1)} className="me-3">
+              Cancel
+            </Button>
+            <Button variant="secondary" type="submit">
+              Add Item
+            </Button>
           </Col>
         </Row>
       </Form>
     </Container>
   );
 };
+
