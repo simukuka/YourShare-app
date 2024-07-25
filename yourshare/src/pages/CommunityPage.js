@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link} from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -10,14 +10,24 @@ import Image from 'react-bootstrap/Image';
 import Y_s from "../images/back-button.png";
 
 export const CommunityPage = (props) => {
-  // const navigate = useNavigate();
-  const [friends, setFriends] = useState([
-    { name: 'Jazmin', borrowed: 'None', lent: 'Back Pack', bestFriend: true },
-    { name: 'Lee', borrowed: 'None', lent: 'None', bestFriend: false },
-    { name: 'Obianuju', borrowed: 'Water Bottle', lent: 'Text Book', bestFriend: true },
-    { name: 'Prithvi', borrowed: 'Phone Charger', lent: 'None', bestFriend: false }
-  ]);
+  // Load friends from localStorage or use default values
+  const loadFriendsFromLocalStorage = () => {
+    const savedFriends = localStorage.getItem('friends');
+    return savedFriends ? JSON.parse(savedFriends) : [
+      { name: 'Jazmin', borrowed: 'None', lent: 'Back Pack', bestFriend: true },
+      { name: 'Lee', borrowed: 'None', lent: 'None', bestFriend: false },
+      { name: 'Obianuju', borrowed: 'Water Bottle', lent: 'Text Book', bestFriend: true },
+      { name: 'Prithvi', borrowed: 'Phone Charger', lent: 'None', bestFriend: false }
+    ];
+  };
+
+  const [friends, setFriends] = useState(loadFriendsFromLocalStorage);
   const [newFriend, setNewFriend] = useState({ name: '', borrowed: 'None', lent: 'None', bestFriend: false });
+
+  // Update localStorage whenever friends state changes
+  useEffect(() => {
+    localStorage.setItem('friends', JSON.stringify(friends));
+  }, [friends]);
 
   const handleAddFriend = (event) => {
     event.preventDefault();
@@ -34,7 +44,6 @@ export const CommunityPage = (props) => {
   };
 
   const handleCheckboxChange = (index) => {
-    console.log(`Checkbox clicked for index: ${index}`); // Debugging log
     setFriends(friends.map((friend, i) =>
       i === index ? { ...friend, bestFriend: !friend.bestFriend } : friend
     ));
