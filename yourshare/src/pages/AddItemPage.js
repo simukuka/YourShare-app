@@ -5,7 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 export const AddItemPage = () => {
   const navigate = useNavigate();
-  const [image, setImage] = useState(null);
+  const username = localStorage.getItem('username');
+  
+  const [image,setImage]=useState(null)
   const [formData, setFormData] = useState({
     itemName: '',
     type: '',
@@ -37,12 +39,18 @@ export const AddItemPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.itemName && formData.type && formData.description && image) {
-     
-      navigate('/welcome', { state: { formData, image } });
-    } else {
-      alert('Please fill out all fields and upload an image.');
+      const newItem = { ...formData, image, lender: username };
+      // Get existing items from local storage
+      const existingItems = JSON.parse(localStorage.getItem('yourItems')) || [];
+      const updatedItems = [...existingItems, newItem];
+      // Save updated items to local storage
+      localStorage.setItem('yourItems', JSON.stringify(updatedItems));
+
+      navigate('/welcome', { state: { formData, image, username } });
+    } else{
+      alert("Please fill out all fields and upload an iamge.");
     }
-  };
+  }
 
   return (
     <Container>
